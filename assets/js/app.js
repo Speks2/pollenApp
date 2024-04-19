@@ -1,117 +1,130 @@
+// Function to create pollen settings form
+function createPollenSettingsForm() {
+    const form = document.createElement('form');
+    form.id = 'pollenSettingsForm';
 
-//Remember to actually call the function or else it won't occur!
-getLocation()
+    // Add checkboxes for all pollen types
+    const pollenTypes = ['alder_pollen', 'birch_pollen', 'grass_pollen', 'mugwort_pollen', 'olive_pollen', 'ragweed_pollen'];
+    pollenTypes.forEach(pollenType => {
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="checkbox" name="pollenType" value="${pollenType}"> ${pollenType.replace('_', ' ').toUpperCase()}`;
+        form.appendChild(label);
+        form.appendChild(document.createElement('br'));
+    });
 
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.textContent = 'Save Settings';
+    form.appendChild(submitButton);
+
+    return form;
+}
+
+// Function to handle form submission and save settings to local storage
+function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const selectedPollenTypes = [];
+    const checkboxes = document.querySelectorAll('input[name="pollenType"]:checked');
+    checkboxes.forEach(checkbox => {
+        selectedPollenTypes.push(checkbox.value);
+    });
+
+    localStorage.setItem('selectedPollenTypes', JSON.stringify(selectedPollenTypes));
+    alert('Settings saved successfully!');
+}
+
+// Function to display pollen settings form when nav_settings button is clicked
+function displayPollenSettings() {
+    const pollenSettingsForm = createPollenSettingsForm();
+    document.body.appendChild(pollenSettingsForm);
+
+    pollenSettingsForm.addEventListener('submit', handleFormSubmit);
+}
+
+// Call the getLocation function
+getLocation();
+
+// getLocation function to get user's location
 function getLocation() {
     if (navigator.geolocation) {
-        //The function getCurrentPosition requires a success parameter and a failure parameter (the function between the commas")
         navigator.geolocation.getCurrentPosition(showPosition, positionError);
-        //if the site does not give its position, then an error will display
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
 }
 
+// showPosition function to display user's location
 function showPosition(position) {
-    //shows the long and lat in the console. Can be displayed in the HTML as well
-    //console.log(position.coords.longitude);
-    //console.log(position.coords.latitude);
-    
-    getUserReadableLocation(position.coords.latitude, position.coords.longitude);
-    getPollenData(position.coords.latitude, position.coords.longitude);
+    const lat = position.coords.latitude;
+    const long = position.coords.longitude;
+
+    getUserReadableLocation(lat, long);
+    getPollenData(lat, long);
 }
 
-//the failure function for the function getCurrentPosition
+// positionError function to handle geolocation error
 function positionError() {
-    console.log("Error");
+    console.log("Error getting geolocation.");
 }
 
-
-
-
+// getUserReadableLocation function to get readable location
 function getUserReadableLocation(lat, long) {
-    
     const apiKey = "65fbef1fcd29c689065623miw1a38c3";
     const url = `https://geocode.maps.co/reverse?lat=${lat}&lon=${long}&api_key=${apiKey}`;
-    
-    fetch(url)
-    
-    .then(response => {
-        
-        
-        
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        
-        
-        return response.json();
-    })
-    .then(data => {
-        
-        buildLocationName(data.address.city)
-        
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-        return null;
-    });
-}
-
-function buildLocationName(myCity) {
-    let weatherApp = document.getElementById("app"); 
-
-    weatherApp.innerHTML = `<h1>${myCity}</h1>`;
-}
-
-
-function getPollenData(lat, long) {
-
-//https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.52&longitude=13.41&current=alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen&hourly=alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen&timezone=Europe%2FBerlin&forecast_days=1
-
-    const timeZone = "Europe%2FBerlin";
-
-    const url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${long}&current=alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen&hourly=alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen&timezone=${timeZone}&forecast_days=1`;
 
     fetch(url)
-
         .then(response => {
-
-
-
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
-
             return response.json();
         })
         .then(data => {
-            pollenDataStructure(data)
-            console.log(data);
+            buildLocationName(data.address.city);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            return null;
         });
 }
 
-
-//controller code
-function pollenDataStructure(data) {
-    let myViewData =[]
-
-    myViewData.push(data)
-    console.log(myViewData);
-    buildPollenView(myViewData)
+// buildLocationName function to display location name
+function buildLocationName(myCity) {
+    const weatherApp = document.getElementById("app"); 
+    weatherApp.innerHTML = `<h1>${myCity}</h1>`;
 }
 
+// getPollenData function to get pollen data
+function getPollenData(lat, long) {
+    const timeZone = "Europe%2FBerlin";
+    const url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${long}&current=alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen&hourly=alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen&timezone=${timeZone}&forecast_days=1`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            pollenDataStructure(data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+// pollenDataStructure function to structure pollen data
+function pollenDataStructure(data) {
+    const myViewData = [data];
+    buildPollenView(myViewData);
+}
+
+// buildPollenView function to display pollen data
 function buildPollenView(viewData) {
-    let myDisplayElement = document.getElementById("PollenData");
-
-    let myCurrentData = viewData[0]
-
-    let myCurrentHTML =`
+    const myDisplayElement = document.getElementById("PollenData");
+    const myCurrentData = viewData[0];
+    let myCurrentHTML = `
         <h2>Pollental</h2>
         <ul>
             <div class="line_br"></div>
@@ -127,7 +140,9 @@ function buildPollenView(viewData) {
             <div class="line_br"></divcurrent_units></div>
             <li>ambrosie ${myCurrentData.current.ragweed_pollen} ${myCurrentData.current_units.ragweed_pollen}</li>
         </ul>
-    `
-
-    myDisplayElement.innerHTML = myCurrentHTML
+    `;
+    myDisplayElement.innerHTML = myCurrentHTML;
 }
+
+// Event listener for nav_settings button click
+document.getElementById("nav_settings").addEventListener("click", displayPollenSettings);
