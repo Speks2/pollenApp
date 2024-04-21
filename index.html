@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PollenCount</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/map.css">
+    <link rel="stylesheet" href="./assets/css/settings.css">
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/bundles.js"></script>
+    <script src="./assets/js/map.js"></script>
+    <script src="./assets/js/seetings.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> <!-- Include Leaflet library -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> <!-- Include Leaflet CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,47 +30,14 @@
             <img id="nav_home" src="assets/img/home.svg" alt="home.svg">
             <img id="nav_map" src="assets/img/map.svg" alt="map.svg">
             <img id="nav_settings" src="assets/img/settings.svg" alt="settings.svg">
+            <div id="settings">
+                <h2>Pollen Settings</h2>
+                <label><input type="checkbox" id="treePollenCheckbox"> <img src="./assets/img/birk.png" alt=""> Birk</label><br>
+                <label><input type="checkbox" id="grassPollenCheckbox">  <img src="./assets/img/birk.png" alt="">Elm</label><br>
+                <label><input type="checkbox" id="weedPollenCheckbox"> <img src="./assets/img/birk.png" alt=""> Fisk</label><br>
+              </div>
+              
         </nav>
-    </footer>
-    <script class="map">
-        var map = null; // Store map object
-
-        // Function to show map centered at current location
-        function showMapWithCurrentLocation() {
-            if (map === null) {
-                map = L.map('app'); // Create map
-
-                // Add a tile layer
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-                // Get current location
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-
-                    // Center map at current location
-                    map.setView([latitude, longitude], 13);
-
-                    // Add marker at current location
-                    L.marker([latitude, longitude]).addTo(map)
-                        .bindPopup('Your Location').openPopup();
-                }, function(error) {
-                    console.error('Error getting current position:', error);
-                });
-            } else {
-                // If map is already created, remove it and set map to null
-                map.remove();
-                map = null;
-            }
-        }
-
-        // Add event listener to map button
-        document.getElementById("nav_map").addEventListener("click", function() {
-            showMapWithCurrentLocation();
-        });
-    </script>
+    </footer> 
 </body>
 </html>
-

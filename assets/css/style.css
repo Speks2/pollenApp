@@ -1,13 +1,13 @@
     * {
         margin: 0;
         padding: 0;
-        --grey: #d9d9d9;
+        --grey: #ffffff;
         box-sizing: border-box;
     }
     
     body {
         font-family: "Oswald", sans-serif;
-        color: white;
+        color: rgb(255, 255, 255);
     }
     
     header {
@@ -73,7 +73,7 @@
     
     .pollenApp {
         backdrop-filter: blur(5px);
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(44, 44, 44, 0.3);
         border-radius: 5px;
         width: 300px;
         margin-top: 2rem;
@@ -86,26 +86,61 @@
     #pollen_icon {
         filter: invert(1);
         width: 60%;
-        margin-block: 1rem ;
+        margin-block: rem ;
         align-self: center;
         animation-name: rock;
-        animation-duration: 3s;
+        animation-duration: 8s;
         animation-iteration-count: infinite;
         animation-timing-function:cubic-bezier(0.075, 0.82, 0.165, 1);
     }
+    /* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
     
     @keyframes rock {
         0% {
             transform: rotate(0deg);
         }
         25% {
-            transform: rotate(-10deg);
+            transform: rotate(90deg);
         }
         50% {
-            transform: rotate(0deg);
+            transform: rotate(180);
         }
         75% {
-            transform: rotate(10deg);
+            transform: rotate(360deg);
         }
         100% {
             transform: rotate(0deg);

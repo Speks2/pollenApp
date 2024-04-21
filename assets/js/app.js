@@ -145,4 +145,58 @@ function buildPollenView(viewData) {
 }
 
 // Event listener for nav_settings button click
+// Function to create pollen settings form
+function createPollenSettingsForm() {
+    const form = document.createElement('form');
+    form.id = 'pollenSettingsForm';
+
+    // Add toggle buttons for all pollen types
+    const pollenTypes = ['alder_pollen', 'birch_pollen', 'grass_pollen', 'mugwort_pollen', 'olive_pollen', 'ragweed_pollen'];
+    pollenTypes.forEach(pollenType => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = pollenType.replace('_', ' ').toUpperCase();
+        button.dataset.pollenType = pollenType;
+        button.classList.add('toggle-button');
+        form.appendChild(button);
+    });
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.textContent = 'Save Settings';
+    form.appendChild(submitButton);
+
+    return form;
+}
+
+// Function to handle form submission and save settings to local storage
+function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    // Here you can add logic to save the settings to local storage or perform any other action
+    alert('Settings saved successfully!');
+}
+
+// Function to handle toggle button click event
+function handleToggleButton(event) {
+    const pollenType = event.target.dataset.pollenType;
+    // Here you can add logic to handle the toggle button click for the specific pollen type
+    console.log(`Toggle button clicked for ${pollenType}`);
+}
+
+// Function to display pollen settings form when nav_settings button is clicked
+function displayPollenSettings() {
+    const pollenSettingsForm = createPollenSettingsForm();
+    document.body.appendChild(pollenSettingsForm);
+
+    pollenSettingsForm.addEventListener('submit', handleFormSubmit);
+
+    // Add event listeners for toggle buttons
+    const toggleButtons = document.querySelectorAll('.toggle-button');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', handleToggleButton);
+    });
+}
+
+// Event listener for nav_settings button click
 document.getElementById("nav_settings").addEventListener("click", displayPollenSettings);
