@@ -1,148 +1,111 @@
-    * {
-        margin: 0;
-        padding: 0;
-        --grey: #ffffff;
-        box-sizing: border-box;
-    }
-    
-    body {
-        font-family: "Oswald", sans-serif;
-        color: rgb(255, 255, 255);
-    }
-    
-    header {
-        background-color: #4BA598;
-    }
-
-    footer {
-        background-color: #4BA598;
-       
-    }
-    
-    h1, h2 {
-        text-align: center;
-    }
-    
-    h1 {
-        font-size: 3rem;
-    }
-    
-    li {
-        list-style-type: none;
-        text-align: right;
-    }
-    
-    /* REUSEABLE */
-    
-    .line_br {
-        width: 100%;
-        height: 1px;
-        background-color: var(--grey);
-        margin-block: .5rem;
-    }
-    
-    #bg_img {
-        z-index: -1000;
-        height: 100%;
-        object-fit: cover;
-        position: absolute;
-        top: 0;
-        align-self: center;
-        width: 100%;
-    }
-    
-    .main_nav {
-       background-color: #4BA598;
-        position: absolute;
-        bottom: 0px;
-        height: 4rem;
-        align-items: center;
-        display: flex;
-        width: 95%;
-        justify-content: space-between;
-        left: 2.5%;
-        right: 2.5%;
-        border-radius: 20px 20px 0px 0px;
-        padding: 1rem 3rem;
-    }
-    
-    .main_nav img {
-        height: 40px;
-    }
-    
-    
-    .pollenApp {
-        backdrop-filter: blur(5px);
-        background-color: rgba(44, 44, 44, 0.3);
-        border-radius: 5px;
-        width: 300px;
-        margin-top: 2rem;
-        margin-inline: auto;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    #pollen_icon {
-        filter: invert(1);
-        width: 60%;
-        margin-block: rem ;
-        align-self: center;
-        animation-name: rock;
-        animation-duration: 8s;
-        animation-iteration-count: infinite;
-        animation-timing-function:cubic-bezier(0.075, 0.82, 0.165, 1);
-    }
-    /* Modal styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+* {
+  margin: 0;
+  padding: 0;
+  --grey: #ffffff;
+  box-sizing: border-box;
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+body {
+  font-family: "Oswald", sans-serif;
+  color: rgb(255, 255, 255);
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+header {
+  background-color: #4BA598;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+footer {
+  background-color: #4BA598;
+  margin-top: 2rem;
+  position: fixed; /* or absolute */
+  bottom: 0;
+  width: 100%;
 }
 
-    
-    @keyframes rock {
-        0% {
-            transform: rotate(0deg);
-        }
-        25% {
-            transform: rotate(90deg);
-        }
-        50% {
-            transform: rotate(180);
-        }
-        75% {
-            transform: rotate(360deg);
-        }
-        100% {
-            transform: rotate(0deg);
-        }
-    }
+h1, h2 {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+li {
+  list-style-type: none;
+  text-align: right;
+}
+
+/* REUSEABLE */
+.line_br {
+  width: 100%;
+  height: 1px;
+  background-color: var(--grey);
+  margin-block: 0.5rem;
+}
+
+#bg_img {
+  z-index: -1000;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  align-self: center;
+  width: 100%;
+}
+
+.main_nav {
+  background-color: #4BA598;
+  position: absolute;
+  bottom: 0px;
+  height: 4rem;
+  align-items: center;
+  display: flex;
+  width: 95%;
+  justify-content: space-between;
+  left: 2.5%;
+  right: 2.5%;
+  border-radius: 20px 20px 0px 0px;
+  padding: 1rem 3rem;
+}
+
+.main_nav img {
+  height: 40px;
+}
+
+.pollenApp {
+  color: black;
+  border-radius: 5px;
+  width: 300px;
+  margin-top: 2rem;
+  margin-inline: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#pollen_icon {
+  filter: invert(1);
+  width: 60%;
+  margin-block: rem;
+  align-self: center;
+  animation-name: rock;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  display: none;
+}
+
+#settings {
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 30px;
+  position: absolute;
+}
+
+.pollen-images img {
+  width: 7rem;
+  height: 9rem;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin-top: 3rem;
+}/*# sourceMappingURL=style.css.map */

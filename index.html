@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PollenCount</title>
+    <title>PollenApp</title>
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/map.css">
-    <link rel="stylesheet" href="./assets/css/settings.css">
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/map.js"></script>
-    <script src="./assets/js/seetings.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> <!-- Include Leaflet library -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> <!-- Include Leaflet CSS -->
+    <script src="./sw.js" type = "Module"></script>
+    <script src="./assets/js/bundles.js" type="module"></script>
+    <script src="./assets/js/components/myLocations.js" type="module"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div>
+        <header>
+        
+        
+
+        </header>
+        <main></main>
+        <footer></footer>
+    </div>
+    <div id="settings" class="pollen-images">
+         <img src="./assets/img/birk.png" alt=""> 
+         <img src="./assets/img/birk.png" alt="">
+         <img src="./assets/img/birk.png" alt=""> 
+      </div>
     <header>
         <h1>PollenApp</h1>
     </header>
@@ -30,12 +41,7 @@
             <img id="nav_home" src="assets/img/home.svg" alt="home.svg">
             <img id="nav_map" src="assets/img/map.svg" alt="map.svg">
             <img id="nav_settings" src="assets/img/settings.svg" alt="settings.svg">
-            <div id="settings">
-                <h2>Pollen Settings</h2>
-                <label><input type="checkbox" id="treePollenCheckbox"> <img src="./assets/img/birk.png" alt=""> Birk</label><br>
-                <label><input type="checkbox" id="grassPollenCheckbox">  <img src="./assets/img/birk.png" alt="">Elm</label><br>
-                <label><input type="checkbox" id="weedPollenCheckbox"> <img src="./assets/img/birk.png" alt=""> Fisk</label><br>
-              </div>
+           
               
         </nav>
     </footer> 
