@@ -131,3 +131,4 @@ homeElement.addEventListener("click", function() {
 function homeLoading() {
     myDisplayElement.innerHTML="<h1>Loading...</h1>";
 }
+
