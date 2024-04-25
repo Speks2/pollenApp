@@ -46,7 +46,8 @@ li {
 #bg_img {
   z-index: -1000;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   position: absolute;
   top: 0;
   align-self: center;
@@ -74,13 +75,13 @@ li {
 
 .pollenApp {
   color: black;
-  border-radius: 5px;
-  width: 300px;
-  margin-top: 2rem;
+  border-radius: 3px;
+  width: 200px;
+  margin-top: 1rem;
   margin-inline: auto;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
+  border: 3px solid black;
+  border-radius: 5px;
+  width: 23rem;
 }
 
 #pollen_icon {
@@ -107,5 +108,6 @@ li {
   height: 9rem;
   border: 1px solid #000;
   border-radius: 5px;
-  margin-top: 3rem;
+  margin-top: 4rem;
+  display: none;
 }/*# sourceMappingURL=style.css.map */

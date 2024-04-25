@@ -1,50 +1,12 @@
-// Function to create pollen settings form
-function createPollenSettingsForm() {
-    const form = document.createElement('form');
-    form.id = 'pollenSettingsForm';
-
-    // Add checkboxes for all pollen types
-    const pollenTypes = ['alder_pollen', 'birch_pollen', 'grass_pollen', 'mugwort_pollen', 'olive_pollen', 'ragweed_pollen'];
-    pollenTypes.forEach(pollenType => {
-        const label = document.createElement('label');
-        label.innerHTML = `<input type="checkbox" name="pollenType" value="${pollenType}"> ${pollenType.replace('_', ' ').toUpperCase()}`;
-        form.appendChild(label);
-        form.appendChild(document.createElement('br'));
-    });
-
-    const submitButton = document.createElement('button');
-    submitButton.type = 'submit';
-    submitButton.textContent = 'Save Settings';
-    form.appendChild(submitButton);
-
-    return form;
-}
-
-// Function to handle form submission and save settings to local storage
-function handleFormSubmit(event) {
-    event.preventDefault();
-
-    const selectedPollenTypes = [];
-    const checkboxes = document.querySelectorAll('input[name="pollenType"]:checked');
-    checkboxes.forEach(checkbox => {
-        selectedPollenTypes.push(checkbox.value);
-    });
-
-    localStorage.setItem('selectedPollenTypes', JSON.stringify(selectedPollenTypes));
-    alert('Settings saved successfully!');
-}
-
-// Function to display pollen settings form when nav_settings button is clicked
-function displayPollenSettings() {
-    const pollenSettingsForm = createPollenSettingsForm();
-    document.body.appendChild(pollenSettingsForm);
-
-    pollenSettingsForm.addEventListener('submit', handleFormSubmit);
-}
-
-// Call the getLocation function
+// Settings button
 getLocation();
-
+console.log('loader');
+let settingsButton=document.getElementById('nav_settings');
+console.log(settingsButton); 
+settingsButton.addEventListener('click', ()=> {
+    showSettings()
+    
+})
 // getLocation function to get user's location
 function getLocation() {
     if (navigator.geolocation) {
@@ -121,6 +83,7 @@ function pollenDataStructure(data) {
 }
 
 // buildPollenView function to display pollen data
+// Function to build pollen view with images
 function buildPollenView(viewData) {
     const myDisplayElement = document.getElementById("PollenData");
     const myCurrentData = viewData[0];
@@ -128,86 +91,38 @@ function buildPollenView(viewData) {
         <h2>Pollental</h2>
         <ul>
             <div class="line_br"></div>
-            <li>el ${myCurrentData.current.alder_pollen} ${myCurrentData.current_units.alder_pollen}</li>
+            <li><img src="./assets/img/birk.png" alt=""> el ${myCurrentData.current.alder_pollen} ${myCurrentData.current_units.alder_pollen}</li>
             <div class="line_br"></div>
-            <li>birk ${myCurrentData.current.birch_pollen} ${myCurrentData.current_units.birch_pollen}</li>
+            <li><img src="./assets/img/birk.png" alt=""> birk ${myCurrentData.current.birch_pollen} ${myCurrentData.current_units.birch_pollen}</li>
             <div class="line_br"></div>
-            <li>græs ${myCurrentData.current.grass_pollen} ${myCurrentData.current_units.grass_pollen}</li>
+            <li><img src="./assets/img/birk.png" alt=""> græs ${myCurrentData.current.grass_pollen} ${myCurrentData.current_units.grass_pollen}</li>
             <div class="line_br"></div>
-            <li>bynke ${myCurrentData.current.mugwort_pollen} ${myCurrentData.current_units.mugwort_pollen}</li>
+            <li><img src="./assets/img/birk.png" alt=""> bynke ${myCurrentData.current.mugwort_pollen} ${myCurrentData.current_units.mugwort_pollen}</li>
             <div class="line_br"></div>
-            <li>oliven ${myCurrentData.current.olive_pollen} ${myCurrentData.current_units.olive_pollen}</li>
-            <div class="line_br"></divcurrent_units></div>
-            <li>ambrosie ${myCurrentData.current.ragweed_pollen} ${myCurrentData.current_units.ragweed_pollen}</li>
+            <li><img src="./assets/img/birk.png" alt=""> oliven ${myCurrentData.current.olive_pollen} ${myCurrentData.current_units.olive_pollen}</li>
+            <div class="line_br"></div>
+            <li><img src="./assets/img/birk.png" alt=""> ambrosie ${myCurrentData.current.ragweed_pollen} ${myCurrentData.current_units.ragweed_pollen}</li>
         </ul>
     `;
     myDisplayElement.innerHTML = myCurrentHTML;
 }
 
+const myDisplayElement = document.getElementById("PollenData");
 
+//showSettings function when clicked, shows ONLY Settings
+function showSettings() {
 
+    myDisplayElement.innerHTML = "Settings";
 
+}
 
+//WHEN CLICKED HOME BUTTON IT GOES BACK TO MY LANDING PAGE AWAY FROM SETTINGS
+const homeElement = document.getElementById("nav_home");
 
-
-
-
-
-
-
-// // Event listener for nav_settings button click
-// // Function to create pollen settings form
-// function createPollenSettingsForm() {
-//     const form = document.createElement('form');
-//     form.id = 'pollenSettingsForm';
-
-//     // Add toggle buttons for all pollen types
-//     const pollenTypes = ['alder_pollen', 'birch_pollen', 'grass_pollen', 'mugwort_pollen', 'olive_pollen', 'ragweed_pollen'];
-//     pollenTypes.forEach(pollenType => {
-//         const button = document.createElement('button');
-//         button.type = 'button';
-//         button.textContent = pollenType.replace('_', ' ').toUpperCase();
-//         button.dataset.pollenType = pollenType;
-//         button.classList.add('toggle-button');
-//         form.appendChild(button);
-//     });
-
-//     const submitButton = document.createElement('button');
-//     submitButton.type = 'submit';
-//     submitButton.textContent = 'Save Settings';
-//     form.appendChild(submitButton);
-
-//     return form;
-// }
-
-// // Function to handle form submission and save settings to local storage
-// function handleFormSubmit(event) {
-//     event.preventDefault();
+homeElement.addEventListener("click", function() {
     
-//     // Here you can add logic to save the settings to local storage or perform any other action
-//     alert('Settings saved successfully!');
-// }
-
-// // Function to handle toggle button click event
-// function handleToggleButton(event) {
-//     const pollenType = event.target.dataset.pollenType;
-//     // Here you can add logic to handle the toggle button click for the specific pollen type
-//     console.log(`Toggle button clicked for ${pollenType}`);
-// }
-
-// // Function to display pollen settings form when nav_settings button is clicked
-// function displayPollenSettings() {
-//     const pollenSettingsForm = createPollenSettingsForm();
-//     document.body.appendChild(pollenSettingsForm);
-
-//     pollenSettingsForm.addEventListener('submit', handleFormSubmit);
-
-//     // Add event listeners for toggle buttons
-//     const toggleButtons = document.querySelectorAll('.toggle-button');
-//     toggleButtons.forEach(button => {
-//         button.addEventListener('click', handleToggleButton);
-//     });
-// }
-
-// // Event listener for nav_settings button click
-// document.getElementById("nav_settings").addEventListener("click", displayPollenSettings);
+    
+        getLocation();
+    
+        
+});
