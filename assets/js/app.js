@@ -121,8 +121,13 @@ const homeElement = document.getElementById("nav_home");
 
 homeElement.addEventListener("click", function() {
     
+       homeLoading()
     
         getLocation();
     
         
 });
+
+function homeLoading() {
+    myDisplayElement.innerHTML="<h1>Loading...</h1>";
+}
