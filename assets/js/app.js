@@ -132,3 +132,49 @@ function homeLoading() {
     myDisplayElement.innerHTML="<h1>Loading...</h1>";
 }
 
+// showSettings function when clicked, shows settings to turn on/off different pollens
+function showSettings() {
+    const myDisplayElement = document.getElementById("PollenData");
+    
+    // Generate checkboxes for each type of pollen
+    const settingsHTML = `
+        <h2>Settings</h2>
+        <label><input type="checkbox" id="alderCheckbox" checked> Alder Pollen</label><br>
+        <label><input type="checkbox" id="birchCheckbox" checked> Birch Pollen</label><br>
+        <label><input type="checkbox" id="grassCheckbox" checked> Grass Pollen</label><br>
+        <label><input type="checkbox" id="mugwortCheckbox" checked> Mugwort Pollen</label><br>
+        <label><input type="checkbox" id="oliveCheckbox" checked> Olive Pollen</label><br>
+        <label><input type="checkbox" id="ragweedCheckbox" checked> Ragweed Pollen</label><br>
+        <button onclick="applySettings()">Apply</button>
+    `;
+    
+    myDisplayElement.innerHTML = settingsHTML;
+}
+
+// Function to apply settings and display selected pollens
+function applySettings() {
+    const myDisplayElement = document.getElementById("PollenData");
+    
+    // Get the status of each checkbox
+    const alderChecked = document.getElementById("alderCheckbox").checked;
+    const birchChecked = document.getElementById("birchCheckbox").checked;
+    const grassChecked = document.getElementById("grassCheckbox").checked;
+    const mugwortChecked = document.getElementById("mugwortCheckbox").checked;
+    const oliveChecked = document.getElementById("oliveCheckbox").checked;
+    const ragweedChecked = document.getElementById("ragweedCheckbox").checked;
+    
+    // Rebuild the pollen view based on the selected checkboxes
+    const selectedPollenData = {
+        current: {
+            alder_pollen: alderChecked ? "Alder Pollen" : "",
+            birch_pollen: birchChecked ? "Birch Pollen" : "",
+            grass_pollen: grassChecked ? "Grass Pollen" : "",
+            mugwort_pollen: mugwortChecked ? "Mugwort Pollen" : "",
+            olive_pollen: oliveChecked ? "Olive Pollen" : "",
+            ragweed_pollen: ragweedChecked ? "Ragweed Pollen" : ""
+        },
+        current_units: {} // Empty because we're not displaying units in the settings
+    };
+    
+    buildPollenView([selectedPollenData]);
+}
